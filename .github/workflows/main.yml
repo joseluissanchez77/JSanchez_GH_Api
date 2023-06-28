@@ -1,0 +1,29 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - master
+    
+jobs:
+  publish:
+    runs-on: ubunto-last
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: action/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+        
+      - name: Restore
+        run: donet restore ./JSanchez_GH_Api.sln
+        
+      - name: Build
+        run: dotnet build ./JSanchez_GH_Api.sln --configuration Release --no-restore
+        
+      - name: Publish
+        run: dotnet build ./JSanchez_GH_Api.sln --configuration Release --no-build
+        
