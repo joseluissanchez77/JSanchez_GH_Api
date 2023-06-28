@@ -35,6 +35,7 @@ app.UseCors(options =>
 //    app.UseSwagger();
 //    app.UseSwaggerUI();
 //}
+//produccion lines comment
 app.UseSwagger();
 app.UseSwaggerUI();
 
