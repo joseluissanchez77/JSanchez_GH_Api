@@ -6,9 +6,13 @@ on:
     branches:
     - master
     
+env:
+  AZURE_WEBAPP_NAME: api-jose-sanchez-gh
+  AZURE_WEBAPP_PACKAGE_PATH: "./publish"
+  
 jobs:
   publish:
-    runs-on: ubunto-last
+    runs-on: ubunto-latest
     
     steps:
       - uses: actions/checkout@v3
@@ -25,5 +29,12 @@ jobs:
         run: dotnet build ./JSanchez_GH_Api.sln --configuration Release --no-restore
         
       - name: Publish
-        run: dotnet build ./JSanchez_GH_Api.sln --configuration Release --no-build
+        run: dotnet build ./JSanchez_GH_Api.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}' 
         
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+          package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+  
