@@ -18,18 +18,19 @@ namespace JSanchez_GH_Api.Controllers
             _dbcontext = dbcontext;
         }
 
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<PersonDto>>> GetHomes()
-        {
-            _logger.LogInformation("Obtener las personas");
+        ////listar
+        //[HttpGet]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //public async Task<ActionResult<IEnumerable<PersonDto>>> GetHomes()
+        //{
+        //    _logger.LogInformation("Obtener las personas");
 
 
-            return Ok(await _dbcontext.Persons.ToListAsync());
+        //    return Ok(await _dbcontext.Persons.ToListAsync());
 
-        }
+        //}
 
-
+        //Obtener por id
         [HttpGet("id:int", Name = "GetNPerson")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -51,6 +52,8 @@ namespace JSanchez_GH_Api.Controllers
             return Ok(home);
         }
 
+
+        //Guardar
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -97,6 +100,7 @@ namespace JSanchez_GH_Api.Controllers
             return CreatedAtRoute("GetNPerson", new { id = modelHome.Id }, personsCreateDto);
         }
 
+        //borrar por id
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -122,7 +126,7 @@ namespace JSanchez_GH_Api.Controllers
             return NoContent();
         }
 
-
+        //actualizar por id
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
