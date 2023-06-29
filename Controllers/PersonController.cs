@@ -18,17 +18,17 @@ namespace JSanchez_GH_Api.Controllers
             _dbcontext = dbcontext;
         }
 
-        ////listar
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<IEnumerable<PersonDto>>> GetHomes()
-        //{
-        //    _logger.LogInformation("Obtener las personas");
+        //listar
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<PersonDto>>> GetHomes()
+        {
+            _logger.LogInformation("Obtener las personas");
 
 
-        //    return Ok(await _dbcontext.Persons.ToListAsync());
+            return Ok(await _dbcontext.Persons.ToListAsync());
 
-        //}
+        }
 
         //Obtener por id
         [HttpGet("id:int", Name = "GetNPerson")]
